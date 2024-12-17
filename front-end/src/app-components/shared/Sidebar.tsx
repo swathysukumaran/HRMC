@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     <nav className="w-64 h-screen bg-[#343439] text-white flex-shrink-0 rounded-[30px]">
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-6">Club Management</h2>
+        <h4 className="text-2xl font-heading font-bold mb-6">HRMC</h4>
         <NavigationMenu>
           <NavigationMenuList className="flex flex-col">
             <NavigationMenuItem className="mb-4 w-full">

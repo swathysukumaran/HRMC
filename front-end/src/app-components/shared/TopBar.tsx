@@ -21,18 +21,18 @@ const TopBar = () => {
   };
 
   return (
-    <header className="bg-[#F0F2F5] text-black p-4 w-full flex items-center justify-between">
-      <h1 className="text-xl font-bold">{getCurrentNavItem()}</h1>
+    <header className="bg-[#FAFBFC] text-primary p-4 w-full flex items-center justify-between">
+      <h4 className="font-heading font-bold">{getCurrentNavItem()}</h4>
       <div className="flex items-center space-x-4 ml-auto">
         <Input type="text" placeholder="Search..." className="w-64" />
-        <a href="/profile" className="text-black">
-          <FaUser className="w-6 h-6" />
+        <a href="/profile" className="text-primary">
+          <FaUser className="w-5 h-5" />
         </a>
-        <a href="/settings" className="text-black">
-          <FaCog className="w-6 h-6" />
+        <a href="/settings" className="text-primary">
+          <FaCog className="w-5 h-5" />
         </a>
-        <a href="/notifications" className="text-black">
-          <FaBell className="w-6 h-6" />
+        <a href="/notifications" className="text-primary">
+          <FaBell className="w-5 h-5" />
         </a>
       </div>
     </header>

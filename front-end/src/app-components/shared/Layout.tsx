@@ -8,11 +8,13 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex h-screen w-full bg-[#F0F2F5]">
+    <div className="flex h-screen w-full bg-[#FAFBFC]">
       <Sidebar />
       <div className="flex flex-col flex-grow">
         <TopBar />
-        <main className="flex-grow p-4 bg-[#F0F2F5]">{children}</main>
+        <main className="flex-grow p-4 bg-[#FAFBFC] text-primary">
+          {children}
+        </main>
       </div>
     </div>
   );
