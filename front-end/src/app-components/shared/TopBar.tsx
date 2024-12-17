@@ -21,7 +21,7 @@ const TopBar = () => {
   };
 
   return (
-    <header className="bg-transparent text-black p-4 w-full flex items-center justify-between">
+    <header className="bg-[#F0F2F5] text-black p-4 w-full flex items-center justify-between">
       <h1 className="text-xl font-bold">{getCurrentNavItem()}</h1>
       <div className="flex items-center space-x-4 ml-auto">
         <Input type="text" placeholder="Search..." className="w-64" />
