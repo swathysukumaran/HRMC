@@ -9,7 +9,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <nav className="w-64 h-screen bg-gray-800 text-white flex-shrink-0">
+    <nav className="w-64 h-screen bg-[#343439] text-white flex-shrink-0 rounded-[20px]">
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-6">Club Management</h2>
         <NavigationMenu>
@@ -19,7 +19,7 @@ const Sidebar = () => {
                 to="/"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700",
+                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
                     isActive ? "bg-gray-700" : ""
                   )
                 }
@@ -32,7 +32,7 @@ const Sidebar = () => {
                 to="/about"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700",
+                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
                     isActive ? "bg-gray-700" : ""
                   )
                 }
@@ -45,7 +45,7 @@ const Sidebar = () => {
                 to="/contact"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700",
+                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
                     isActive ? "bg-gray-700" : ""
                   )
                 }
