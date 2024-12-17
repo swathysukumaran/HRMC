@@ -9,7 +9,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <nav className="w-64 h-screen bg-[#343439] text-white flex-shrink-0 rounded-[20px]">
+    <nav className="w-64 h-screen bg-[#343439] text-white flex-shrink-0 rounded-[30px]">
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-6">Club Management</h2>
         <NavigationMenu>
