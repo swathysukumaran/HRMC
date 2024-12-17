@@ -2,6 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
+  FaTachometerAlt,
+  FaUsers,
+  FaDollarSign,
+  FaUserShield,
+  FaCalendarAlt,
+  FaFileInvoiceDollar,
+  FaChartBar,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
@@ -19,11 +30,12 @@ const Sidebar = () => {
                 to="/dashboard"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaTachometerAlt className="mr-2" />
                 Dashboard
               </NavLink>
             </NavigationMenuItem>
@@ -32,11 +44,12 @@ const Sidebar = () => {
                 to="/members"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaUsers className="mr-2" />
                 Members
               </NavLink>
             </NavigationMenuItem>
@@ -45,11 +58,12 @@ const Sidebar = () => {
                 to="/subscriptions"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaDollarSign className="mr-2" />
                 Subscriptions
               </NavLink>
             </NavigationMenuItem>
@@ -58,11 +72,12 @@ const Sidebar = () => {
                 to="/roles"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaUserShield className="mr-2" />
                 Roles
               </NavLink>
             </NavigationMenuItem>
@@ -71,11 +86,12 @@ const Sidebar = () => {
                 to="/events"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaCalendarAlt className="mr-2" />
                 Events
               </NavLink>
             </NavigationMenuItem>
@@ -84,11 +100,12 @@ const Sidebar = () => {
                 to="/finances"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaFileInvoiceDollar className="mr-2" />
                 Finances
               </NavLink>
             </NavigationMenuItem>
@@ -97,11 +114,12 @@ const Sidebar = () => {
                 to="/reports"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaChartBar className="mr-2" />
                 Reports
               </NavLink>
             </NavigationMenuItem>
@@ -110,12 +128,27 @@ const Sidebar = () => {
                 to="/settings"
                 className={({ isActive }) =>
                   cn(
-                    "block p-2 rounded w-full hover:bg-gray-700 text-left",
-                    isActive ? "bg-gray-700" : ""
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
                   )
                 }
               >
+                <FaCog className="mr-2" />
                 Settings
+              </NavLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="mb-4 w-full">
+              <NavLink
+                to="/logout"
+                className={({ isActive }) =>
+                  cn(
+                    "flex items-center p-2 rounded w-full hover:bg-gray-700 hover:text-white text-left text-white",
+                    isActive ? "bg-[#3791ED]" : ""
+                  )
+                }
+              >
+                <FaSignOutAlt className="mr-2" />
+                Logout
               </NavLink>
             </NavigationMenuItem>
           </NavigationMenuList>
