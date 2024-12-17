@@ -9,12 +9,22 @@ const TopBar = () => {
 
   const getCurrentNavItem = () => {
     switch (currentPath) {
-      case "/":
-        return "Home";
-      case "/about":
-        return "About";
-      case "/contact":
-        return "Contact";
+      case "/dashboard":
+        return "Dashboard";
+      case "/members":
+        return "Members";
+      case "/subscriptions":
+        return "Subscriptions";
+      case "/roles":
+        return "Roles";
+      case "/events":
+        return "Events";
+      case "/finances":
+        return "Finances";
+      case "/reports":
+        return "Reports";
+      case "/settings":
+        return "Settings";
       default:
         return "";
     }
@@ -22,17 +32,17 @@ const TopBar = () => {
 
   return (
     <header className="bg-[#FAFBFC] text-primary p-4 w-full flex items-center justify-between">
-      <h4 className="font-heading font-bold">{getCurrentNavItem()}</h4>
+      <h1 className="text-xl font-heading font-bold">{getCurrentNavItem()}</h1>
       <div className="flex items-center space-x-4 ml-auto">
         <Input type="text" placeholder="Search..." className="w-64" />
         <a href="/profile" className="text-primary">
-          <FaUser className="w-5 h-5" />
+          <FaUser className="w-4 h-4" />
         </a>
         <a href="/settings" className="text-primary">
-          <FaCog className="w-5 h-5" />
+          <FaCog className="w-4 h-4" />
         </a>
         <a href="/notifications" className="text-primary">
-          <FaBell className="w-5 h-5" />
+          <FaBell className="w-4 h-4" />
         </a>
       </div>
     </header>
