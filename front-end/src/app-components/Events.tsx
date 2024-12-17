@@ -1,11 +1,11 @@
 import React from "react";
 
-function About() {
+function Events() {
   return (
     <div>
-      <p>About page</p>
+      <p>events</p>
     </div>
   );
 }
 
-export default About;
+export default Events;
