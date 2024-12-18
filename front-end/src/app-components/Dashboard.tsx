@@ -8,8 +8,52 @@ import {
   FaClipboardList,
 } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register the necessary components with Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Dashboard() {
+  const financialSummaryData = {
+    labels: ["Total Income", "Total Expenses", "Net Balance"],
+    datasets: [
+      {
+        data: [10000, 7500, 2500],
+        backgroundColor: ["#5FB563", "#E83975", "#3791ED"],
+      },
+    ],
+  };
+
+  const upcomingEvents = [
+    { date: "25th Dec", event: "Annual Meeting" },
+    { date: "5th Jan", event: "Monthly Meetup" },
+    { date: "15th Jan", event: "Charity Run" },
+  ];
+
+  const nextEvent = upcomingEvents[0];
+
   return (
     <div className="p-4 space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -34,9 +78,12 @@ function Dashboard() {
             <CardTitle>Upcoming Events</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl">5</p>
+            <p className="text-3xl">{upcomingEvents.length}</p>
             <hr className="my-2 border-t border-gray-200" />
-            <p className="text-sm text-gray-500">Next: 25th Dec</p>
+            <p className="text-sm text-gray-500">
+              <span className="font-bold">{nextEvent.date}:</span>{" "}
+              {nextEvent.event}
+            </p>
           </CardContent>
         </Card>
         <Card className="relative bg-white text-black p-4 rounded-xl shadow-lg border-0">
@@ -70,53 +117,26 @@ function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card className="bg-white text-black p-4 rounded-xl shadow-lg border-0">
           <CardHeader>
-            <CardTitle>Recent Activities</CardTitle>
+            <CardTitle>Financial Summary</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc pl-5">
-              <li>New member John Doe added</li>
-              <li>Event "Annual Meeting" created</li>
-              <li>Subscription payment received from Jane Smith</li>
-            </ul>
-          </CardContent>
-        </Card>
-        <Card className="bg-white text-black p-4 rounded-xl shadow-lg border-0">
-          <CardHeader>
-            <CardTitle>Upcoming Events</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc pl-5">
-              <li>Annual Meeting - 25th Dec</li>
-              <li>Monthly Meetup - 5th Jan</li>
-              <li>Charity Run - 15th Jan</li>
-            </ul>
+            <Pie data={financialSummaryData} />
           </CardContent>
         </Card>
       </div>
 
-      <Card className="bg-white text-black p-4 rounded-xl shadow-lg border-0">
-        <CardHeader>
-          <CardTitle>Financial Summary</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>Total Income: $10,000</p>
-          <p>Total Expenses: $7,500</p>
-          <p>Net Balance: $2,500</p>
-        </CardContent>
-      </Card>
-
       <div className="flex space-x-4">
-        <button className="bg-[#E83975] text-white px-4 py-2 rounded flex items-center">
-          <FaPlus className="mr-1.5 text-base" />
-          Add New Member
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+          <FaPlus className="mr-1.5 text-base text-[#E83975]" />
+          <span className="text-[#E83975]">Add New Member</span>
         </button>
-        <button className="bg-[#5FB563] text-white px-4 py-2 rounded flex items-center">
-          <FaCalendarAlt className="mr-1.5 text-base" />
-          Create Event
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+          <FaCalendarAlt className="mr-1.5 text-base text-[#5FB563]" />
+          <span className="text-[#5FB563]">Create Event</span>
         </button>
-        <button className="bg-[#FB8C00] text-white px-4 py-2 rounded flex items-center">
-          <FaClipboardList className="mr-1.5 text-base" />
-          Generate Report
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+          <FaClipboardList className="mr-1.5 text-base text-[#FB8C00]" />
+          <span className="text-[#FB8C00]">Generate Report</span>
         </button>
       </div>
     </div>
