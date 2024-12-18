@@ -3,12 +3,13 @@ import "./App.css";
 import Layout from "./app-components/shared/Layout";
 import Dashboard from "./app-components/Dashboard";
 import Members from "./app-components/Members";
+import MemberDetail from "./app-components/MemberDetail";
 import Subscriptions from "./app-components/Subscriptions";
 import Roles from "./app-components/Roles";
 import Events from "./app-components/Events";
 import Finances from "./app-components/Finances";
 import Reports from "./app-components/Reports";
-import Settings from "./app-components/settings";
+import Settings from "./app-components/Settings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/members" element={<Members />} />
+          <Route path="/members/:id" element={<MemberDetail />} />
           <Route path="/subscriptions" element={<Subscriptions />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/events" element={<Events />} />

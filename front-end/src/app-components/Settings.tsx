@@ -1,4 +1,4 @@
-function settings() {
+function Settings() {
   return (
     <div>
       <p>settings</p>
@@ -6,4 +6,4 @@ function settings() {
   );
 }
 
-export default settings;
+export default Settings;
