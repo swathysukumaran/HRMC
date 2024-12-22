@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,109 +9,100 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+
+interface Member {
+  id: number;
+  name: string;
+  status: string;
+  subscriptionFee: number;
+  pendingPayment: number;
+}
+
+const mockMembers: Member[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    status: "active",
+    subscriptionFee: 100,
+    pendingPayment: 50,
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    status: "inactive",
+    subscriptionFee: 100,
+    pendingPayment: 100,
+  },
+  {
+    id: 3,
+    name: "Alice Johnson",
+    status: "active",
+    subscriptionFee: 100,
+    pendingPayment: 0,
+  },
+  {
+    id: 4,
+    name: "Bob Brown",
+    status: "inactive",
+    subscriptionFee: 100,
+    pendingPayment: 75,
+  },
+];
 
 function Subscriptions() {
-  interface Member {
-    id: number;
-    name: string;
-    subscriptionAmount: number;
-    amountPaid: number;
-    lastReminder: string | null;
-    status: string;
-  }
+  const [members, setMembers] = useState<Member[]>(mockMembers);
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
+  const [paymentAmount, setPaymentAmount] = useState<number>(0);
 
-  const [members, setMembers] = useState<Member[]>([]);
-
-  // Mock data
-  const mockMembers = [
-    {
-      id: 1,
-      name: "John Doe",
-      subscriptionAmount: 100,
-      amountPaid: 0,
-      lastReminder: null,
-      status: "active",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      subscriptionAmount: 100,
-      amountPaid: 100,
-      lastReminder: null,
-      status: "inactive",
-    },
-    {
-      id: 3,
-      name: "Alice Johnson",
-      subscriptionAmount: 100,
-      amountPaid: 50,
-      lastReminder: "2023-10-01",
-      status: "active",
-    },
-    {
-      id: 4,
-      name: "Bob Brown",
-      subscriptionAmount: 100,
-      amountPaid: 100,
-      lastReminder: null,
-      status: "inactive",
-    },
-  ];
-
-  useEffect(() => {
-    // Simulate fetching data from an API
-    setMembers(mockMembers);
-  }, []);
-
-  interface HandleMarkPaid {
-    (id: number, amount: number): void;
-  }
-
-  const handleMarkPaid: HandleMarkPaid = (id, amount) => {
-    setMembers((prevMembers) =>
-      prevMembers.map((member) =>
-        member.id === id
-          ? { ...member, amountPaid: member.amountPaid + amount }
-          : member
-      )
-    );
-  };
-
-  interface HandleSendReminder {
-    (id: number): void;
-  }
-
-  const handleSendReminder: HandleSendReminder = (id) => {
-    const currentDate = new Date().toISOString().split("T")[0];
-    setMembers((prevMembers) =>
-      prevMembers.map((member) =>
-        member.id === id ? { ...member, lastReminder: currentDate } : member
-      )
-    );
-  };
-
-  interface HandleDeactivate {
-    (id: number): void;
-  }
-
-  const handleDeactivate: HandleDeactivate = (id) => {
-    setMembers((prevMembers) =>
-      prevMembers.map((member) =>
+  const handleDeactivate = (id: number): void => {
+    setMembers((prevMembers: Member[]) =>
+      prevMembers.map((member: Member) =>
         member.id === id ? { ...member, status: "inactive" } : member
       )
     );
   };
 
-  const pendingSubscriptions = members.filter(
-    (member) => member.amountPaid < member.subscriptionAmount
-  ).length;
+  const handleActivate = (id: number): void => {
+    setMembers((prevMembers: Member[]) =>
+      prevMembers.map((member: Member) =>
+        member.id === id ? { ...member, status: "active" } : member
+      )
+    );
+  };
+
+  const handleMakePayment = (id: number): void => {
+    const member = members.find((member) => member.id === id);
+    if (member) {
+      setSelectedMember(member);
+      setPaymentAmount(0);
+    }
+  };
+
+  const handlePaymentSubmit = (): void => {
+    if (selectedMember) {
+      setMembers((prevMembers: Member[]) =>
+        prevMembers.map((member: Member) =>
+          member.id === selectedMember.id
+            ? {
+                ...member,
+                pendingPayment: Math.max(
+                  0,
+                  member.pendingPayment - paymentAmount
+                ),
+              }
+            : member
+        )
+      );
+      setSelectedMember(null);
+    }
+  };
 
   return (
     <div className="p-4 space-y-8">
@@ -120,14 +111,13 @@ function Subscriptions() {
           <CardTitle>Subscriptions</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">Pending Subscriptions: {pendingSubscriptions}</p>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="text-left">Name</TableHead>
-                <TableHead className="text-left">Subscription Amount</TableHead>
-                <TableHead className="text-left">Amount Paid</TableHead>
-                <TableHead className="text-left">Last Reminder</TableHead>
+                <TableHead className="text-left">Status</TableHead>
+                <TableHead className="text-left">Subscription Fee</TableHead>
+                <TableHead className="text-left">Pending Payment</TableHead>
                 <TableHead className="text-left">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -135,73 +125,47 @@ function Subscriptions() {
               {members.map((member) => (
                 <TableRow key={member.id}>
                   <TableCell className="text-left">{member.name}</TableCell>
+                  <TableCell className="text-left">{member.status}</TableCell>
                   <TableCell className="text-left">
-                    ${member.subscriptionAmount}
+                    ${member.subscriptionFee}
                   </TableCell>
                   <TableCell className="text-left">
-                    ${member.amountPaid}
+                    ${member.pendingPayment}
                   </TableCell>
                   <TableCell className="text-left">
-                    {member.lastReminder || "N/A"}
-                  </TableCell>
-                  <TableCell className="text-left">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button className="bg-gray-500 text-white">
-                          Actions
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="bg-white border border-gray-300">
-                        <DropdownMenuItem className="hover:bg-gray-100">
-                          <div className="flex items-center">
-                            <Input
-                              type="number"
-                              min="1"
-                              max={
-                                member.subscriptionAmount - member.amountPaid
-                              }
-                              defaultValue={
-                                member.subscriptionAmount - member.amountPaid
-                              }
-                              className="mr-2 w-20"
-                              onChange={(e) =>
-                                handleMarkPaid(
-                                  member.id,
-                                  parseInt(e.target.value)
-                                )
-                              }
-                            />
-                            <Button
-                              className="bg-green-500 text-white"
-                              onClick={() =>
-                                handleMarkPaid(
-                                  member.id,
-                                  member.subscriptionAmount - member.amountPaid
-                                )
-                              }
-                            >
-                              Mark as Paid
-                            </Button>
-                          </div>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gray-100">
-                          <Button
-                            className="bg-blue-500 text-white"
-                            onClick={() => handleSendReminder(member.id)}
-                          >
-                            Send Reminder
-                          </Button>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gray-100">
-                          <Button
-                            className="bg-red-500 text-white"
-                            onClick={() => handleDeactivate(member.id)}
-                          >
-                            Deactivate Member
-                          </Button>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {member.status === "active" ? (
+                      <Button
+                        className="mr-2"
+                        style={{
+                          backgroundColor: "var(--danger-color)",
+                          color: "var(--background-color)",
+                        }}
+                        onClick={() => handleDeactivate(member.id)}
+                      >
+                        Deactivate
+                      </Button>
+                    ) : (
+                      <Button
+                        className="mr-2"
+                        style={{
+                          backgroundColor: "var(--primary-color)",
+                          color: "var(--background-color)",
+                        }}
+                        onClick={() => handleActivate(member.id)}
+                      >
+                        Activate
+                      </Button>
+                    )}
+                    <Button
+                      className="mr-2"
+                      style={{
+                        backgroundColor: "var(--secondary-color)",
+                        color: "var(--background-color)",
+                      }}
+                      onClick={() => handleMakePayment(member.id)}
+                    >
+                      Make Payment
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -209,6 +173,35 @@ function Subscriptions() {
           </Table>
         </CardContent>
       </Card>
+
+      {selectedMember && (
+        <Dialog
+          open={!!selectedMember}
+          onOpenChange={() => setSelectedMember(null)}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Make Payment for {selectedMember.name}</DialogTitle>
+            </DialogHeader>
+            <Input
+              type="number"
+              placeholder="Payment Amount"
+              value={paymentAmount}
+              onChange={(e) => setPaymentAmount(Number(e.target.value))}
+              className="mb-4 w-full p-2 border rounded"
+            />
+            <Button
+              style={{
+                backgroundColor: "var(--secondary-color)",
+                color: "var(--background-color)",
+              }}
+              onClick={handlePaymentSubmit}
+            >
+              Submit Payment
+            </Button>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }

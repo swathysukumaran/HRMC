@@ -1,4 +1,6 @@
+@import './assets/colors.css';
 
+/* Other global styles */
 #root {
   width:100%;
   text-align: center;

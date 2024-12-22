@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #1e3a8a;
+    /* Blue */
+    --secondary-color: #10b981;
+    /* Green */
+    --danger-color: #ef4444;
+    /* Red */
+    --warning-color: #f59e0b;
+    /* Yellow */
+    --background-color: #ffffff;
+    /* White */
+    --text-color: #000000;
+    /* Black */
+    --border-color: #e5e7eb;
+    /* Gray */
+}
