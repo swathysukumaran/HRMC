@@ -55,8 +55,8 @@ function Dashboard() {
   const nextEvent = upcomingEvents[0];
 
   return (
-    <div className="p-4 space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-6">
         <Card className="relative bg-white text-black p-4 rounded-xl shadow-lg border-0">
           <div className="absolute -top-6 left-4 bg-[#E83975] text-white p-3 rounded-lg">
             <FaUsers className="text-3xl" />
@@ -114,7 +114,7 @@ function Dashboard() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <Card className="bg-white text-black p-4 rounded-xl shadow-lg border-0">
           <CardHeader>
             <CardTitle>Financial Summary</CardTitle>
@@ -125,21 +125,21 @@ function Dashboard() {
         </Card>
       </div>
 
-      <div className="flex space-x-4">
-        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+      <div className="flex flex-wrap space-x-4 mb-6">
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300 mb-2">
           <FaPlus className="mr-1.5 text-base text-[#E83975]" />
           <span className="text-[#E83975]">Add New Member</span>
         </button>
-        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300 mb-2">
           <FaCalendarAlt className="mr-1.5 text-base text-[#5FB563]" />
           <span className="text-[#5FB563]">Create Event</span>
         </button>
-        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300">
+        <button className="bg-gray-200 text-black px-4 py-2 rounded flex items-center hover:bg-gray-300 mb-2">
           <FaClipboardList className="mr-1.5 text-base text-[#FB8C00]" />
           <span className="text-[#FB8C00]">Generate Report</span>
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

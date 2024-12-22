@@ -1,20 +1,18 @@
-import { ReactNode } from "react";
+import React from "react";
 import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex h-screen w-full bg-[#FAFBFC]">
+    <div className="flex h-screen w-full bg-white">
       <Sidebar />
       <div className="flex flex-col flex-grow">
-        <TopBar />
-        <main className="flex-grow p-4 bg-[#FAFBFC] text-primary">
-          {children}
-        </main>
+        <TopBar pageTitle="Your Page Title" />
+        <main className="flex-grow p-6 overflow-auto">{children}</main>
       </div>
     </div>
   );
