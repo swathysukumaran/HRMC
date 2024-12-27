@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="flex h-screen w-full bg-white">
       <Sidebar />
       <div className="flex flex-col flex-grow h-full">
-        <TopBar pageTitle="Your Page Title" />
+        <TopBar />
         <main className="flex-grow p-6 overflow-auto h-full">{children}</main>
       </div>
     </div>
