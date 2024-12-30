@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import TopBar from "./TopBar";
 
@@ -7,12 +7,20 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="flex h-screen w-full bg-white">
-      <Sidebar />
-      <div className="flex flex-col flex-grow h-full">
-        <TopBar />
-        <main className="flex-grow p-6 overflow-auto h-full">{children}</main>
+    <div className="flex h-screen w-full overflow-hidden">
+      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+      <div className="flex flex-col flex-grow h-full ">
+        <TopBar toggleSidebar={toggleSidebar} />
+        <main className="flex-grow p-0 md:p-6 overflow-auto h-full Lg:pt-16">
+          {children}
+        </main>
       </div>
     </div>
   );

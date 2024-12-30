@@ -103,7 +103,7 @@ const Members = () => {
   };
 
   return (
-    <div className="p-6 h-full flex flex-col">
+    <div className="h-full flex flex-col">
       <h1 className="text-2xl font-bold mb-6">Members</h1>
       <button
         onClick={handleAddMember}

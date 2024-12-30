@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
@@ -18,23 +18,21 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+interface SidebarProps {
+  isOpen: boolean;
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
+  toggleSidebar: () => void;
+}
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   return (
-    <div className="lg:w-64">
+    <div className="lg:w-64 w-0">
       <button className="lg:hidden p-4 text-gray-700" onClick={toggleSidebar}>
         <FaBars className="text-2xl" />
       </button>
       <div
         className={`fixed inset-y-0 left-0 bg-[#343439] text-white shadow-lg transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 w-64`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 w-64 h-full`}
       >
         <div className="p-4">
           <h4 className="text-2xl font-heading font-bold mb-6">HRMC</h4>

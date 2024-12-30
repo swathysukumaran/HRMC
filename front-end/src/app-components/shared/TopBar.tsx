@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRegBell, FaRegUserCircle } from "react-icons/fa";
+import { FaBars, FaRegBell, FaRegUserCircle } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { useLocation } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const pageTitles: { [key: string]: string } = {
   // Add more paths and titles as needed
 };
 
-const TopBar = () => {
+const TopBar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
   const location = useLocation();
   const path = location.pathname;
   const pageTitle = pageTitles[path] || "Dashboard";
@@ -21,8 +21,11 @@ const TopBar = () => {
   };
 
   return (
-    <div className="p-4 flex justify-between items-center bg-white">
+    <div className="p-4 flex justify-between items-center bg-white shadow-md  top-0 left-0 right-0 z-40 ">
       <div className="flex items-center space-x-4">
+        <button className="lg:hidden p-4 text-gray-700" onClick={toggleSidebar}>
+          <FaBars className="text-2xl" />
+        </button>
         {!showSearch && <h1 className="text-xl font-bold">{pageTitle}</h1>}
       </div>
       <div className="flex items-center space-x-4">

@@ -118,9 +118,9 @@ const MemberDetail = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       <h1 className="text-2xl font-bold mb-6">Member Details</h1>
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className=" p-6 rounded-lg shadow-md">
         <img
           src={member.photo}
           alt={member.name}
