@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./app-components/shared/Layout";
 import Dashboard from "./app-components/Dashboard";
-import Members from "./app-components/Members";
 import MemberDetail from "./app-components/MemberDetail";
+import MembersPage from "./app-components/MembersPage";
 import AddMember from "./app-components/AddMember";
 import Subscriptions from "./app-components/Subscriptions";
 import Roles from "./app-components/Roles";
@@ -18,7 +18,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/members" element={<Members />} />
+          <Route path="/members" element={<MembersPage />} />
           <Route path="/members/add" element={<AddMember />} />
           <Route path="/members/:id" element={<MemberDetail />} />
           <Route path="/subscriptions" element={<Subscriptions />} />

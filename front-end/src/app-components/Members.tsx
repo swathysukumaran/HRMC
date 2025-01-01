@@ -1,92 +1,38 @@
 import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useNavigate } from "react-router-dom";
 
-interface Member {
-  id: number;
-  name: string;
-  dob: string;
-  membershipNumber: string;
-  bloodGroup: string;
-  fathersName: string;
-  houseName: string;
-  address: string;
-  mobileNumber: string;
-  whatsappNumber: string;
-  occupation: string;
-  interests: string[];
-  photo: string;
-  status: string;
-}
-
-const Members = () => {
-  const [members, setMembers] = useState<Member[]>([]);
+function Members() {
+  const [members, setMembers] = useState<
+    { id: number; name: string; email: string; status: string }[]
+  >([]);
   const navigate = useNavigate();
 
-  const mockMembers: Member[] = [
-    {
-      id: 1,
-      name: "John Doe",
-      dob: "1990-01-01",
-      membershipNumber: "H-101",
-      bloodGroup: "A+",
-      fathersName: "Richard Doe",
-      houseName: "Doe Villa",
-      address: "123 Main St, Springfield",
-      mobileNumber: "1234567890",
-      whatsappNumber: "1234567890",
-      occupation: "Engineer",
-      interests: ["Reading", "Traveling"],
-      photo: "path/to/photo.jpg",
-      status: "active",
-    },
+  // Mock data
+  const mockMembers = [
+    { id: 1, name: "John Doe", email: "john@example.com", status: "active" },
     {
       id: 2,
       name: "Jane Smith",
-      dob: "1985-05-15",
-      membershipNumber: "H-102",
-      bloodGroup: "B+",
-      fathersName: "Michael Smith",
-      houseName: "Smith House",
-      address: "456 Elm St, Springfield",
-      mobileNumber: "0987654321",
-      whatsappNumber: "0987654321",
-      occupation: "Doctor",
-      interests: ["Cooking", "Hiking"],
-      photo: "path/to/photo.jpg",
+      email: "jane@example.com",
       status: "inactive",
     },
     {
       id: 3,
       name: "Alice Johnson",
-      dob: "1992-07-20",
-      membershipNumber: "H-103",
-      bloodGroup: "O+",
-      fathersName: "Robert Johnson",
-      houseName: "Johnson Villa",
-      address: "789 Oak St, Springfield",
-      mobileNumber: "1122334455",
-      whatsappNumber: "1122334455",
-      occupation: "Teacher",
-      interests: ["Painting", "Gardening"],
-      photo: "path/to/photo.jpg",
+      email: "alice@example.com",
       status: "active",
     },
-    {
-      id: 4,
-      name: "Bob Brown",
-      dob: "1988-03-10",
-      membershipNumber: "H-104",
-      bloodGroup: "AB+",
-      fathersName: "William Brown",
-      houseName: "Brown House",
-      address: "321 Pine St, Springfield",
-      mobileNumber: "6677889900",
-      whatsappNumber: "6677889900",
-      occupation: "Artist",
-      interests: ["Music", "Photography"],
-      photo: "path/to/photo.jpg",
-      status: "inactive",
-    },
+    { id: 4, name: "Bob Brown", email: "bob@example.com", status: "inactive" },
   ];
 
   useEffect(() => {
@@ -98,68 +44,45 @@ const Members = () => {
     navigate(`/members/${id}`);
   };
 
-  const handleAddMember = () => {
-    navigate("/members/add");
-  };
-
   return (
-    <div className="h-full flex flex-col">
-      <h1 className="text-2xl font-bold mb-6">Members</h1>
-      <button
-        onClick={handleAddMember}
-        className="mb-4 bg-green-500 text-white px-4 py-2 rounded ml-auto max-w-xs"
-      >
-        Add New Member
-      </button>
-      <div className="overflow-x-auto flex-grow">
-        <table className="min-w-full w-full bg-white h-full">
-          <thead>
-            <tr>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b hidden md:table-cell">DOB</th>
-              <th className="py-2 px-4 border-b hidden lg:table-cell">
-                Membership Number
-              </th>
-              <th className="py-2 px-4 border-b hidden lg:table-cell">
-                Blood Group
-              </th>
-              <th className="py-2 px-4 border-b hidden md:table-cell">
-                Mobile Number
-              </th>
-              <th className="py-2 px-4 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {members.map((member) => (
-              <tr key={member.id}>
-                <td className="py-2 px-4 border-b">{member.name}</td>
-                <td className="py-2 px-4 border-b hidden md:table-cell">
-                  {member.dob}
-                </td>
-                <td className="py-2 px-4 border-b hidden lg:table-cell">
-                  {member.membershipNumber}
-                </td>
-                <td className="py-2 px-4 border-b hidden lg:table-cell">
-                  {member.bloodGroup}
-                </td>
-                <td className="py-2 px-4 border-b hidden md:table-cell">
-                  {member.mobileNumber}
-                </td>
-                <td className="py-2 px-4 border-b">
-                  <button
-                    onClick={() => handleView(member.id)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                  >
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="p-4 space-y-8">
+      <Card className="bg-white text-black p-4 rounded-xl shadow-lg border-0">
+        <CardHeader>
+          <CardTitle>Members</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-left">Name</TableHead>
+                <TableHead className="text-left">Email</TableHead>
+                <TableHead className="text-left">Status</TableHead>
+                <TableHead className="text-left">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {members.map((member) => (
+                <TableRow key={member.id}>
+                  <TableCell className="text-left">{member.name}</TableCell>
+                  <TableCell className="text-left">{member.email}</TableCell>
+                  <TableCell className="text-left">{member.status}</TableCell>
+                  <TableCell className="text-left">
+                    <Button
+                      className="mr-2 bg-blue-500 text-white"
+                      onClick={() => handleView(member.id)}
+                    >
+                      View
+                    </Button>
+                    <Button className="bg-red-500 text-white">Delete</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
-};
+}
 
 export default Members;

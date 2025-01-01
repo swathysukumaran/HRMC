@@ -34,9 +34,27 @@ const AddMember = () => {
     }));
   };
 
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setMember((prevMember) => ({ ...prevMember, [name]: value }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const setImage = (file: File) => {
+    setMember((prevMember) => ({ ...prevMember, photo: file.name }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -176,14 +194,29 @@ const AddMember = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700">Photo URL</label>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="image"
+            >
+              Upload Image
+            </label>
             <input
-              type="text"
-              name="photo"
-              value={member.photo}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded"
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
+            {imagePreview && (
+              <div className="mt-4">
+                <img
+                  src={imagePreview}
+                  alt="Image Preview"
+                  className="w-32 h-32 object-cover rounded-full"
+                />
+              </div>
+            )}
           </div>
           <div>
             <label className="block text-gray-700">Status</label>
